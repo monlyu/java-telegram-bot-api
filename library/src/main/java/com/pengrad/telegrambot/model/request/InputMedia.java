@@ -1,5 +1,6 @@
 package com.pengrad.telegrambot.model.request;
 
+import com.google.gson.annotations.SerializedName;
 import com.pengrad.telegrambot.AttachName;
 import com.pengrad.telegrambot.model.MessageEntity;
 
@@ -14,6 +15,9 @@ import java.util.Map;
  */
 abstract public class InputMedia<T extends InputMedia<T>> implements Serializable {
     private final static long serialVersionUID = 0L;
+
+    @SerializedName("@targetClass")
+    private String targetClass;
 
     @SuppressWarnings("unchecked")
     private final T thisAsT = (T) this;
@@ -35,6 +39,7 @@ abstract public class InputMedia<T extends InputMedia<T>> implements Serializabl
 
     InputMedia(String type, Object media) {
         this.type = type;
+        this.targetClass = this.getClass().getName();
         if (media instanceof String) {
             this.media = (String) media;
         } else {

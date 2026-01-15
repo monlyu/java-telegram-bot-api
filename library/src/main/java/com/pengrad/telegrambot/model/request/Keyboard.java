@@ -1,5 +1,7 @@
 package com.pengrad.telegrambot.model.request;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 /**
@@ -8,4 +10,11 @@ import java.io.Serializable;
  */
 public abstract class Keyboard implements Serializable {
     private final static long serialVersionUID = 0L;
+
+    @SerializedName("@targetClass")
+    private String targetClass;
+
+    protected Keyboard() {
+        this.targetClass = this.getClass().getName();
+    }
 }

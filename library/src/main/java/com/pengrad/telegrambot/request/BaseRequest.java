@@ -1,9 +1,11 @@
 package com.pengrad.telegrambot.request;
 
+import com.google.gson.annotations.SerializedName;
 import com.pengrad.telegrambot.utility.BotUtils;
 import com.pengrad.telegrambot.response.BaseResponse;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -70,4 +72,14 @@ abstract public class BaseRequest<T extends BaseRequest<T, R>, R extends BaseRes
         fullMap.put("method", getMethod());
         return BotUtils.toJson(fullMap);
     }
+
+    public String toJson() {
+        Map<String, Object> target = new HashMap<>(getParameters());
+        target.put("@request", this.getClass().getName());
+        target.put("@method", getMethod());
+        target.put("@multipart", Boolean.toString(isMultipart()));
+        target.put("@response", this.responseClass.getName());
+        return BotUtils.toJson(target);
+    }
+
 }

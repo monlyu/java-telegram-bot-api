@@ -44,4 +44,12 @@ public class InputFile {
     void setContentType(String contentType) {
         this.contentType = contentType;
     }
+
+    @Override
+    public String toString() {
+        if (bytes == null) {
+            return "@file->" + file.getAbsoluteFile();
+        }
+        return "@byte->" + bytes.length;
+    }
 }

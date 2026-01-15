@@ -16,6 +16,7 @@ public class InlineKeyboardMarkup extends Keyboard implements Serializable {
     private final List<List<InlineKeyboardButton>> inline_keyboard;
 
     public InlineKeyboardMarkup() {
+        super(); // This will set the trueClass field
         this.inline_keyboard = new ArrayList<>();
     }
 
