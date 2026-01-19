@@ -1,6 +1,9 @@
 package com.pengrad.telegrambot.request;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.ToNumberPolicy;
+import com.google.gson.reflect.TypeToken;
 import com.google.gson.JsonParseException;
 import com.pengrad.telegrambot.response.BaseResponse;
 import com.pengrad.telegrambot.utility.extend.Byte2B64Adapter;
@@ -100,7 +103,9 @@ public class UniversalRequest<R extends BaseResponse> extends BaseRequest<Univer
     }
 
     public static UniversalRequest makeFromJson(String json) {
-        Map<String, Object> rawMap = new Gson().fromJson(json, Map.class);
+        Gson gson = new GsonBuilder().setObjectToNumberStrategy(ToNumberPolicy.LONG_OR_DOUBLE).create();
+        Map<String, Object> rawMap = gson.fromJson(json, new TypeToken<Map<String, Object>>() {
+        }.getType());
         try {
             String responseClassName = (String) rawMap.remove("@response");
             String methodName = (String) rawMap.remove("@method");

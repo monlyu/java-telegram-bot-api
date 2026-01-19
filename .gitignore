@@ -17,3 +17,5 @@ private.key
 library/.classpath
 sample/.classpath
 .vscode/settings.json
+/library/publish-private.gradle
+/library/build.sh
