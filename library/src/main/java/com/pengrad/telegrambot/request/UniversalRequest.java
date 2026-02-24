@@ -2,10 +2,11 @@ package com.pengrad.telegrambot.request;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParseException;
 import com.google.gson.ToNumberPolicy;
 import com.google.gson.reflect.TypeToken;
-import com.google.gson.JsonParseException;
 import com.pengrad.telegrambot.response.BaseResponse;
+import com.pengrad.telegrambot.utility.BotUtils;
 import com.pengrad.telegrambot.utility.extend.Byte2B64Adapter;
 import com.pengrad.telegrambot.utility.extend.InputFileAdapter;
 
@@ -63,11 +64,10 @@ public class UniversalRequest<R extends BaseResponse> extends BaseRequest<Univer
     private static Object createInstanceFromMap(String className, Map<String, Object> valueMap) {
         try {
             Class<?> clazz = Class.forName(className);
-
             boolean any = Arrays.stream(clazz.getConstructors()).anyMatch(e -> e.getParameters().length == 0);
             if (any) {
                 String jsonString = new Gson().toJson(valueMap);
-                return new Gson().fromJson(jsonString, clazz);
+                return BotUtils.GSON.fromJson(jsonString, clazz);
             }
 
             for (Constructor<?> ctor : clazz.getConstructors()) {

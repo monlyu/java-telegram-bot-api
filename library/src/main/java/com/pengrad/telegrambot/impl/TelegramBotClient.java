@@ -141,6 +141,7 @@ public class TelegramBotClient {
     }
 
     private String toParamValue(Object obj) {
+        if (obj == null) return null;
         if (obj.getClass().isPrimitive() ||
                 obj.getClass().isEnum() ||
                 obj.getClass().getName().startsWith("java.lang")) {
