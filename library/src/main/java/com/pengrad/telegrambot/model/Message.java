@@ -131,6 +131,10 @@ public class Message extends MaybeInaccessibleMessage implements Serializable {
     private SuggestedPostRefunded suggested_post_refunded;
     private DirectMessagePriceChanged direct_message_price_changed;
     private Integer paid_star_count;
+    private String guest_query_id;
+    private User guest_bot_caller_user;
+    private Chat guest_bot_caller_chat;
+    private LivePhoto live_photo;
 
     public Long messageThreadId() {
         return message_thread_id;
@@ -533,6 +537,22 @@ public class Message extends MaybeInaccessibleMessage implements Serializable {
         return paid_star_count;
     }
 
+    public String guestQueryId() {
+        return guest_query_id;
+    }
+
+    public User guestBotCallerUser() {
+        return guest_bot_caller_user;
+    }
+
+    public Chat guestBotCallerChat() {
+        return guest_bot_caller_chat;
+    }
+
+    public LivePhoto livePhoto() {
+        return live_photo;
+    }
+
     /**
      * Only for backwards-compatibility with MaybeInaccessibleMessage
      */
@@ -661,7 +681,11 @@ public class Message extends MaybeInaccessibleMessage implements Serializable {
                 Objects.equals(suggested_post_paid, message.suggested_post_paid) &&
                 Objects.equals(suggested_post_refunded, message.suggested_post_refunded) &&
                 Objects.equals(direct_message_price_changed, message.direct_message_price_changed) &&
-                Objects.equals(paid_star_count, message.paid_star_count);
+                Objects.equals(paid_star_count, message.paid_star_count) &&
+                Objects.equals(guest_query_id, message.guest_query_id) &&
+                Objects.equals(guest_bot_caller_user, message.guest_bot_caller_user) &&
+                Objects.equals(guest_bot_caller_chat, message.guest_bot_caller_chat) &&
+                Objects.equals(live_photo, message.live_photo);
     }
 
     @Override
@@ -775,6 +799,10 @@ public class Message extends MaybeInaccessibleMessage implements Serializable {
                 ", suggested_post_refunded=" + suggested_post_refunded +
                 ", direct_message_price_changed=" + direct_message_price_changed +
                 ", paid_star_count=" + paid_star_count +
+                ", guest_query_id='" + guest_query_id + '\'' +
+                ", guest_bot_caller_user=" + guest_bot_caller_user +
+                ", guest_bot_caller_chat=" + guest_bot_caller_chat +
+                ", live_photo=" + live_photo +
                 '}';
     }
 }

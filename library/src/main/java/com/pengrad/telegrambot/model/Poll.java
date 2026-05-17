@@ -26,8 +26,12 @@ public class Poll implements Serializable {
     private Integer correct_option_id;
     private String explanation;
     private MessageEntity[] explanation_entities;
+    private PollMedia explanation_media;
     private Integer open_period;
     private Integer close_date;
+    private PollMedia media;
+    private Boolean members_only;
+    private String[] country_codes;
 
     public String id() {
         return id;
@@ -85,6 +89,22 @@ public class Poll implements Serializable {
         return close_date;
     }
 
+    public PollMedia media() {
+        return media;
+    }
+
+    public PollMedia explanationMedia() {
+        return explanation_media;
+    }
+
+    public Boolean membersOnly() {
+        return members_only != null && members_only;
+    }
+
+    public String[] countryCodes() {
+        return country_codes;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -108,7 +128,11 @@ public class Poll implements Serializable {
         if (explanation != null ? !explanation.equals(poll.explanation) : poll.explanation != null) return false;
         if (!Arrays.equals(explanation_entities, poll.explanation_entities)) return false;
         if (open_period != null ? !open_period.equals(poll.open_period) : poll.open_period != null) return false;
-        return close_date != null ? close_date.equals(poll.close_date) : poll.close_date == null;
+        if (close_date != null ? !close_date.equals(poll.close_date) : poll.close_date != null) return false;
+        if (media != null ? !media.equals(poll.media) : poll.media != null) return false;
+        if (explanation_media != null ? !explanation_media.equals(poll.explanation_media) : poll.explanation_media != null) return false;
+        if (members_only != null ? !members_only.equals(poll.members_only) : poll.members_only != null) return false;
+        return Arrays.equals(country_codes, poll.country_codes);
     }
 
     @Override
@@ -131,8 +155,12 @@ public class Poll implements Serializable {
                 ", correct_option_id=" + correct_option_id +
                 ", explanation='" + explanation + '\'' +
                 ", explanation_entities=" + Arrays.toString(explanation_entities) +
+                ", explanation_media=" + explanation_media +
                 ", open_period=" + open_period +
                 ", close_date=" + close_date +
+                ", media=" + media +
+                ", members_only=" + members_only +
+                ", country_codes=" + Arrays.toString(country_codes) +
                 '}';
     }
 }

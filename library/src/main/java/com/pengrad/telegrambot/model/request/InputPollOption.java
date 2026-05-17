@@ -13,6 +13,7 @@ public class InputPollOption implements Serializable {
     private String text;
     private String text_parse_mode;
     private MessageEntity[] text_entities;
+    private Object media;
 
     public InputPollOption(String text) {
         this.text = text;
@@ -27,7 +28,22 @@ public class InputPollOption implements Serializable {
     public InputPollOption textEntities(MessageEntity... entities) {
         this.text_entities = entities;
         return this;
-    }    
+    }
+
+    public InputPollOption media(InputMedia<?> media) {
+        this.media = media;
+        return this;
+    }
+
+    public InputPollOption media(InputMediaLocation media) {
+        this.media = media;
+        return this;
+    }
+
+    public InputPollOption media(InputMediaVenue media) {
+        this.media = media;
+        return this;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -36,12 +52,13 @@ public class InputPollOption implements Serializable {
         InputPollOption that = (InputPollOption) o;
         return Objects.equals(text, that.text)
             && Objects.equals(text_parse_mode, that.text_parse_mode)
-            && Arrays.equals(text_entities, that.text_entities);
+            && Arrays.equals(text_entities, that.text_entities)
+            && Objects.equals(media, that.media);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(text, text_parse_mode, text_entities);
+        return Objects.hash(text, text_parse_mode, text_entities, media);
     }
 
     @Override
@@ -50,6 +67,7 @@ public class InputPollOption implements Serializable {
             "text='" + text + '\'' +
             ", text_parse_mode='" + text_parse_mode + '\'' +
             ", text_entities=" + Arrays.toString(text_entities) +
+            ", media=" + media +
             '}';
     }
 }

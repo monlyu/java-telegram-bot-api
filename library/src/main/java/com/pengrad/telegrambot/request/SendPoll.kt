@@ -8,6 +8,8 @@ import com.pengrad.telegrambot.utility.kotlin.checkDeprecatedConstructorParamete
 import com.pengrad.telegrambot.utility.kotlin.optionalRequestParameter
 import com.pengrad.telegrambot.utility.kotlin.requestParameter
 
+@Suppress("unused")
+
 class SendPoll private constructor(
     chatId: Long? = null,
     channelUsername: String? = null,
@@ -76,6 +78,11 @@ class SendPoll private constructor(
     var closeDate: Long? by optionalRequestParameter()
     var isClosed: Boolean? by optionalRequestParameter()
 
+    var media: Any? by optionalRequestParameter()
+    var explanationMedia: Any? by optionalRequestParameter()
+    var membersOnly: Boolean? by optionalRequestParameter()
+    var countryCodes: List<String>? by optionalRequestParameter()
+
     fun type(type: Poll.Type) = applySelf { this.type = type }
 
     fun type(typeRaw: String) = applySelf { this.typeRaw = typeRaw }
@@ -105,5 +112,15 @@ class SendPoll private constructor(
     fun closeDate(closeDate: Long) = applySelf { this.closeDate = closeDate }
 
     fun isClosed(isClosed: Boolean) = applySelf { this.isClosed = isClosed }
+
+    fun media(media: Any) = applySelf { this.media = media }
+
+    fun explanationMedia(explanationMedia: Any) = applySelf { this.explanationMedia = explanationMedia }
+
+    fun membersOnly(membersOnly: Boolean) = applySelf { this.membersOnly = membersOnly }
+
+    fun countryCodes(countryCodes: List<String>) = applySelf { this.countryCodes = countryCodes }
+
+    fun countryCodes(vararg countryCodes: String) = countryCodes(countryCodes.toList())
 
 }

@@ -25,6 +25,7 @@ public class Update implements Serializable {
     private Message business_message;
     private Message edited_business_message;
     private BusinessMessageDeleted deleted_business_messages;
+    private Message guest_message;
     private InlineQuery inline_query;
     private ChosenInlineResult chosen_inline_result;
     private CallbackQuery callback_query;
@@ -75,6 +76,10 @@ public class Update implements Serializable {
 
     public BusinessMessageDeleted deletedBusinessMessages() {
         return deleted_business_messages;
+    }
+
+    public Message guestMessage() {
+        return guest_message;
     }
 
     public InlineQuery inlineQuery() {
@@ -151,6 +156,7 @@ public class Update implements Serializable {
                 Objects.equals(business_message, update.business_message) &&
                 Objects.equals(edited_business_message, update.edited_business_message) &&
                 Objects.equals(deleted_business_messages, update.deleted_business_messages) &&
+                Objects.equals(guest_message, update.guest_message) &&
                 Objects.equals(inline_query, update.inline_query) &&
                 Objects.equals(chosen_inline_result, update.chosen_inline_result) &&
                 Objects.equals(callback_query, update.callback_query) &&
@@ -185,6 +191,7 @@ public class Update implements Serializable {
                 ", business_message=" + business_message +
                 ", edited_business_message=" + edited_business_message +
                 ", deleted_business_messages=" + deleted_business_messages +
+                ", guest_message=" + guest_message +
                 ", inline_query=" + inline_query +
                 ", chosen_inline_result=" + chosen_inline_result +
                 ", callback_query=" + callback_query +

@@ -12,4 +12,8 @@ public class GetChatAdministrators extends BaseRequest<GetChatAdministrators, Ge
         super(GetChatAdministratorsResponse.class);
         add("chat_id", chatId);
     }
+
+    public GetChatAdministrators returnBots(boolean returnBots) {
+        return add("return_bots", returnBots);
+    }
 }

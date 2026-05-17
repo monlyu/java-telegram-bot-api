@@ -49,6 +49,7 @@ public class ChatMember implements Serializable {
     private Boolean can_send_polls;
     private Boolean can_send_other_messages;
     private Boolean can_add_web_page_previews;
+    private Boolean can_react_to_messages;
 
     public User user() {
         return user;
@@ -178,6 +179,10 @@ public class ChatMember implements Serializable {
         return can_add_web_page_previews != null && can_add_web_page_previews;
     }
 
+    public Boolean canReactToMessages() {
+        return can_react_to_messages != null && can_react_to_messages;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -214,7 +219,8 @@ public class ChatMember implements Serializable {
                 Objects.equals(can_send_voice_notes, that.can_send_voice_notes) &&
                 Objects.equals(can_send_polls, that.can_send_polls) &&
                 Objects.equals(can_send_other_messages, that.can_send_other_messages) &&
-                Objects.equals(can_add_web_page_previews, that.can_add_web_page_previews);
+                Objects.equals(can_add_web_page_previews, that.can_add_web_page_previews) &&
+                Objects.equals(can_react_to_messages, that.can_react_to_messages);
     }
 
     @Override
@@ -250,7 +256,8 @@ public class ChatMember implements Serializable {
                 can_send_voice_notes,
                 can_send_polls,
                 can_send_other_messages,
-                can_add_web_page_previews);
+                can_add_web_page_previews,
+                can_react_to_messages);
     }
 
     @Override
@@ -288,6 +295,7 @@ public class ChatMember implements Serializable {
                 ", can_send_polls=" + can_send_polls +
                 ", can_send_other_messages=" + can_send_other_messages +
                 ", can_add_web_page_previews=" + can_add_web_page_previews +
+                ", can_react_to_messages=" + can_react_to_messages +
                 '}';
     }
 }

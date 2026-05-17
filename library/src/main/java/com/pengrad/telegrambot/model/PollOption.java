@@ -13,6 +13,7 @@ public class PollOption implements Serializable {
     private String text;
     private Integer voter_count;
     private MessageEntity[] text_entities;
+    private PollMedia media;
 
     public String text() {
         return text;
@@ -26,6 +27,10 @@ public class PollOption implements Serializable {
         return text_entities;
     }
 
+    public PollMedia media() {
+        return media;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -36,7 +41,8 @@ public class PollOption implements Serializable {
         if (!Arrays.equals(text_entities, that.text_entities)) return false;
 
         if (text != null ? !text.equals(that.text) : that.text != null) return false;
-        return voter_count != null ? voter_count.equals(that.voter_count) : that.voter_count == null;
+        if (voter_count != null ? !voter_count.equals(that.voter_count) : that.voter_count != null) return false;
+        return media != null ? media.equals(that.media) : that.media == null;
     }
 
     @Override
@@ -52,6 +58,7 @@ public class PollOption implements Serializable {
                 "text='" + text + '\'' +
                 ", voter_count=" + voter_count +
                 ", text_entities=" + Arrays.toString(text_entities) +
+                ", media=" + media +
                 '}';
     }
 }

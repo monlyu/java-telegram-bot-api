@@ -2,6 +2,7 @@ package com.pengrad.telegrambot.utility.gson;
 
 import com.google.gson.*;
 import com.pengrad.telegrambot.model.paidmedia.PaidMedia;
+import com.pengrad.telegrambot.model.paidmedia.PaidMediaLivePhoto;
 import com.pengrad.telegrambot.model.paidmedia.PaidMediaPhoto;
 import com.pengrad.telegrambot.model.paidmedia.PaidMediaPreview;
 import com.pengrad.telegrambot.model.paidmedia.PaidMediaVideo;
@@ -22,6 +23,8 @@ public class PaidMediaTypeAdapter implements JsonDeserializer<PaidMedia> {
             return context.deserialize(object, PaidMediaPhoto.class);
         } else if (PaidMediaVideo.TYPE.equals(discriminator)) {
             return context.deserialize(object, PaidMediaVideo.class);
+        } else if (PaidMediaLivePhoto.TYPE.equals(discriminator)) {
+            return context.deserialize(object, PaidMediaLivePhoto.class);
         }
 
         return new PaidMedia(discriminator);
