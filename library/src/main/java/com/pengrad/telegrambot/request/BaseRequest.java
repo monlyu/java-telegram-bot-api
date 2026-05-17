@@ -79,6 +79,10 @@ abstract public class BaseRequest<T extends BaseRequest<T, R>, R extends BaseRes
         target.put("@method", getMethod());
         target.put("@multipart", Boolean.toString(isMultipart()));
         target.put("@response", this.responseClass.getName());
+        if (isMultipart()) {
+            target.put("user_file_name", getFileName());
+            target.put("user_mime_type", getContentType());
+        }
         return BotUtils.toJson(target);
     }
 

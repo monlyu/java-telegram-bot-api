@@ -7,6 +7,8 @@ import com.google.gson.ToNumberPolicy;
 import com.google.gson.reflect.TypeToken;
 import com.pengrad.telegrambot.response.BaseResponse;
 import com.pengrad.telegrambot.utility.BotUtils;
+import com.pengrad.telegrambot.utility.castor.JsonCastor;
+import com.pengrad.telegrambot.utility.castor.JsonCastors;
 import com.pengrad.telegrambot.utility.extend.Byte2B64Adapter;
 import com.pengrad.telegrambot.utility.extend.InputFileAdapter;
 
@@ -48,6 +50,8 @@ public class UniversalRequest<R extends BaseResponse> extends BaseRequest<Univer
                 return num.floatValue();
             }
         }
+
+
         // If no special conversion is found, try a simple cast.
         // This will throw ClassCastException if types are incompatible, which we catch above.
         return expectedType.cast(rawValue);
@@ -69,7 +73,6 @@ public class UniversalRequest<R extends BaseResponse> extends BaseRequest<Univer
                 String jsonString = new Gson().toJson(valueMap);
                 return BotUtils.GSON.fromJson(jsonString, clazz);
             }
-
             for (Constructor<?> ctor : clazz.getConstructors()) {
                 Parameter[] params = ctor.getParameters();
                 boolean canSatisfy = true;
@@ -102,6 +105,18 @@ public class UniversalRequest<R extends BaseResponse> extends BaseRequest<Univer
         }
     }
 
+    @Override
+    public String getContentType() {
+        String contentType = (String) this.getParameters().get("user_mime_type");
+        return contentType != null && !contentType.isEmpty() ? contentType : super.getContentType();
+    }
+
+    @Override
+    public String getFileName() {
+        String fileName = (String) this.getParameters().get("user_file_name");
+        return fileName != null && !fileName.isEmpty() ? fileName : super.getFileName();
+    }
+
     public static UniversalRequest makeFromJson(String json) {
         Gson gson = new GsonBuilder().setObjectToNumberStrategy(ToNumberPolicy.LONG_OR_DOUBLE).create();
         Map<String, Object> rawMap = gson.fromJson(json, new TypeToken<Map<String, Object>>() {
@@ -129,8 +144,15 @@ public class UniversalRequest<R extends BaseResponse> extends BaseRequest<Univer
                         if (valueMap.containsKey("@targetClass")) {
                             Map<String, Object> valus = (Map<String, Object>) value;
                             String className = (String) valus.remove("@targetClass");
-                            Object instance = createInstanceFromMap(className, valus);
-                            universalRequest.add(entry.getKey(), instance);
+                            JsonCastor castor = JsonCastors.getCastor(className);
+                            if (castor != null) {
+                                Class<?> clazz = Class.forName(className);
+                                Object instance = castor.cast(gson, clazz, valus);
+                                universalRequest.add(entry.getKey(), instance);
+                            } else {
+                                Object instance = createInstanceFromMap(className, valus);
+                                universalRequest.add(entry.getKey(), instance);
+                            }
                         } else if (valueMap.containsKey("path")) {
                             universalRequest.add(entry.getKey(), new File(((String) valueMap.get("path"))));
                         } else if (valueMap.containsKey("isInputFile")) {
@@ -188,4 +210,6 @@ public class UniversalRequest<R extends BaseResponse> extends BaseRequest<Univer
         }
         return builder.toString();
     }
+
+
 }
