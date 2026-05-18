@@ -65,7 +65,12 @@ class SendPoll private constructor(
 
     var isAnonymous: Boolean? by optionalRequestParameter()
     var allowsMultipleAnswers: Boolean? by optionalRequestParameter()
-    var correctOptionId: Int? by optionalRequestParameter()
+    var allowsRevoting: Boolean? by optionalRequestParameter()
+    var correctOptionIds: List<Int>? by optionalRequestParameter()
+
+    var shuffleOptions: Boolean? by optionalRequestParameter()
+    var allowAddingOptions: Boolean? by optionalRequestParameter()
+    var hideResultsUntilCloses: Boolean? by optionalRequestParameter()
 
     var questionParseMode: ParseMode? by optionalRequestParameter()
     var questionEntities: List<MessageEntity>? by optionalRequestParameter()
@@ -73,6 +78,10 @@ class SendPoll private constructor(
     var explanation: String? by optionalRequestParameter()
     var explanationParseMode: ParseMode? by optionalRequestParameter()
     var explanationEntities: List<MessageEntity>? by optionalRequestParameter()
+
+    var description: String? by optionalRequestParameter()
+    var descriptionParseMode: ParseMode? by optionalRequestParameter()
+    var descriptionEntities: List<MessageEntity>? by optionalRequestParameter()
 
     var openPeriod: Int? by optionalRequestParameter()
     var closeDate: Long? by optionalRequestParameter()
@@ -91,7 +100,17 @@ class SendPoll private constructor(
 
     fun allowsMultipleAnswers(allowMultipleAnswers: Boolean) = applySelf { this.allowsMultipleAnswers = allowMultipleAnswers }
 
-    fun correctOptionId(correctOptionId: Int) = applySelf { this.correctOptionId = correctOptionId }
+    fun allowsRevoting(allowsRevoting: Boolean) = applySelf { this.allowsRevoting = allowsRevoting }
+
+    fun correctOptionIds(correctOptionIds: List<Int>) = applySelf { this.correctOptionIds = correctOptionIds }
+
+    fun correctOptionIds(vararg correctOptionIds: Int) = correctOptionIds(correctOptionIds.toList())
+
+    fun shuffleOptions(shuffleOptions: Boolean) = applySelf { this.shuffleOptions = shuffleOptions }
+
+    fun allowAddingOptions(allowAddingOptions: Boolean) = applySelf { this.allowAddingOptions = allowAddingOptions }
+
+    fun hideResultsUntilCloses(hideResultsUntilCloses: Boolean) = applySelf { this.hideResultsUntilCloses = hideResultsUntilCloses }
 
     fun questionParseMode(questionParseMode: ParseMode) = applySelf { this.questionParseMode = questionParseMode }
 
@@ -106,6 +125,14 @@ class SendPoll private constructor(
     fun explanationEntities(explanationEntities: List<MessageEntity>) = applySelf { this.explanationEntities = explanationEntities }
 
     fun explanationEntities(vararg explanationEntities: MessageEntity) = explanationEntities(explanationEntities.toList())
+
+    fun description(description: String) = applySelf { this.description = description }
+
+    fun descriptionParseMode(descriptionParseMode: ParseMode) = applySelf { this.descriptionParseMode = descriptionParseMode }
+
+    fun descriptionEntities(descriptionEntities: List<MessageEntity>) = applySelf { this.descriptionEntities = descriptionEntities }
+
+    fun descriptionEntities(vararg descriptionEntities: MessageEntity) = descriptionEntities(descriptionEntities.toList())
 
     fun openPeriod(openPeriod: Int) = applySelf { this.openPeriod = openPeriod }
 

@@ -14,5 +14,6 @@ data class UniqueGift(
     @get:JvmName("giftId") val giftId: String? = null,
     @get:JvmName("isFromBlockchain") val isFromBlockchain: Boolean? = null,
     @get:JvmName("isPremium") val isPremium: Boolean? = null,
-    @get:JvmName("colors") val colors: UniqueGiftColors? = null
+    @get:JvmName("colors") val colors: UniqueGiftColors? = null,
+    @get:JvmName("isBurned") val isBurned: Boolean? = null
 )

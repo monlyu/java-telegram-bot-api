@@ -24,7 +24,9 @@ public class User implements Serializable {
     private Boolean can_connect_to_business;
     private Boolean has_main_web_app;
     private Boolean has_topics_enabled;
+    private Boolean allows_users_to_create_topics;
     private Boolean supports_guest_queries;
+    private Boolean can_manage_bots;
 
     private User() {
     }
@@ -89,8 +91,16 @@ public class User implements Serializable {
         return has_topics_enabled;
     }
 
+    public Boolean allowsUsersToCreateTopics() {
+        return allows_users_to_create_topics != null && allows_users_to_create_topics;
+    }
+
     public Boolean supportsGuestQueries() {
         return supports_guest_queries != null && supports_guest_queries;
+    }
+
+    public Boolean canManageBots() {
+        return can_manage_bots != null && can_manage_bots;
     }
 
     @Override
@@ -98,7 +108,7 @@ public class User implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(is_bot, user.is_bot) && Objects.equals(first_name, user.first_name) && Objects.equals(last_name, user.last_name) && Objects.equals(username, user.username) && Objects.equals(language_code, user.language_code) && Objects.equals(is_premium, user.is_premium) && Objects.equals(added_to_attachment_menu, user.added_to_attachment_menu) && Objects.equals(can_join_groups, user.can_join_groups) && Objects.equals(can_read_all_group_messages, user.can_read_all_group_messages) && Objects.equals(supports_inline_queries, user.supports_inline_queries) && Objects.equals(can_connect_to_business, user.can_connect_to_business) && Objects.equals(has_main_web_app, user.has_main_web_app) && Objects.equals(has_topics_enabled, user.has_topics_enabled) && Objects.equals(supports_guest_queries, user.supports_guest_queries);
+        return Objects.equals(id, user.id) && Objects.equals(is_bot, user.is_bot) && Objects.equals(first_name, user.first_name) && Objects.equals(last_name, user.last_name) && Objects.equals(username, user.username) && Objects.equals(language_code, user.language_code) && Objects.equals(is_premium, user.is_premium) && Objects.equals(added_to_attachment_menu, user.added_to_attachment_menu) && Objects.equals(can_join_groups, user.can_join_groups) && Objects.equals(can_read_all_group_messages, user.can_read_all_group_messages) && Objects.equals(supports_inline_queries, user.supports_inline_queries) && Objects.equals(can_connect_to_business, user.can_connect_to_business) && Objects.equals(has_main_web_app, user.has_main_web_app) && Objects.equals(has_topics_enabled, user.has_topics_enabled) && Objects.equals(allows_users_to_create_topics, user.allows_users_to_create_topics) && Objects.equals(supports_guest_queries, user.supports_guest_queries) && Objects.equals(can_manage_bots, user.can_manage_bots);
     }
 
     @Override
@@ -123,7 +133,9 @@ public class User implements Serializable {
                 ", can_connect_to_business=" + can_connect_to_business +
                 ", has_main_web_app=" + has_main_web_app +
                 ", has_topics_enabled=" + has_topics_enabled +
+                ", allows_users_to_create_topics=" + allows_users_to_create_topics +
                 ", supports_guest_queries=" + supports_guest_queries +
+                ", can_manage_bots=" + can_manage_bots +
                 '}';
     }
 }

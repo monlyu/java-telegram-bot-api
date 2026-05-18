@@ -50,6 +50,9 @@ public class ChatMember implements Serializable {
     private Boolean can_send_other_messages;
     private Boolean can_add_web_page_previews;
     private Boolean can_react_to_messages;
+    private String tag;
+    private Boolean can_edit_tag;
+    private Boolean can_manage_tags;
 
     public User user() {
         return user;
@@ -183,6 +186,18 @@ public class ChatMember implements Serializable {
         return can_react_to_messages != null && can_react_to_messages;
     }
 
+    public String tag() {
+        return tag;
+    }
+
+    public Boolean canEditTag() {
+        return can_edit_tag != null && can_edit_tag;
+    }
+
+    public Boolean canManageTags() {
+        return can_manage_tags != null && can_manage_tags;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -220,7 +235,10 @@ public class ChatMember implements Serializable {
                 Objects.equals(can_send_polls, that.can_send_polls) &&
                 Objects.equals(can_send_other_messages, that.can_send_other_messages) &&
                 Objects.equals(can_add_web_page_previews, that.can_add_web_page_previews) &&
-                Objects.equals(can_react_to_messages, that.can_react_to_messages);
+                Objects.equals(can_react_to_messages, that.can_react_to_messages) &&
+                Objects.equals(tag, that.tag) &&
+                Objects.equals(can_edit_tag, that.can_edit_tag) &&
+                Objects.equals(can_manage_tags, that.can_manage_tags);
     }
 
     @Override
@@ -257,7 +275,10 @@ public class ChatMember implements Serializable {
                 can_send_polls,
                 can_send_other_messages,
                 can_add_web_page_previews,
-                can_react_to_messages);
+                can_react_to_messages,
+                tag,
+                can_edit_tag,
+                can_manage_tags);
     }
 
     @Override
@@ -296,6 +317,9 @@ public class ChatMember implements Serializable {
                 ", can_send_other_messages=" + can_send_other_messages +
                 ", can_add_web_page_previews=" + can_add_web_page_previews +
                 ", can_react_to_messages=" + can_react_to_messages +
+                ", tag='" + tag + '\'' +
+                ", can_edit_tag=" + can_edit_tag +
+                ", can_manage_tags=" + can_manage_tags +
                 '}';
     }
 }

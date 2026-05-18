@@ -15,6 +15,7 @@ public class PollAnswer implements Serializable {
     private Chat voter_chat;
     private User user;
     private Integer[] option_ids;
+    private String[] option_persistent_ids;
 
     public String pollId() {
         return poll_id;
@@ -32,6 +33,10 @@ public class PollAnswer implements Serializable {
         return option_ids;
     }
 
+    public String[] optionPersistentIds() {
+        return option_persistent_ids;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -40,18 +45,20 @@ public class PollAnswer implements Serializable {
         return Objects.equals(poll_id, that.poll_id) &&
                 Objects.equals(voter_chat, that.voter_chat) &&
                 Objects.equals(user, that.user) &&
-                Arrays.equals(option_ids, that.option_ids);
+                Arrays.equals(option_ids, that.option_ids) &&
+                Arrays.equals(option_persistent_ids, that.option_persistent_ids);
     }
 
     @Override
     public int hashCode() {
         int result = Objects.hash(poll_id, voter_chat, user);
         result = 31 * result + Arrays.hashCode(option_ids);
+        result = 31 * result + Arrays.hashCode(option_persistent_ids);
         return result;
     }
 
     @Override
     public String toString() {
-        return "PollAnswer{" + "poll_id='" + poll_id + '\'' + ", voter_chat=" + voter_chat + ", user=" + user + ", option_ids=" + Arrays.toString(option_ids) + '}';
+        return "PollAnswer{" + "poll_id='" + poll_id + '\'' + ", voter_chat=" + voter_chat + ", user=" + user + ", option_ids=" + Arrays.toString(option_ids) + ", option_persistent_ids=" + Arrays.toString(option_persistent_ids) + '}';
     }
 }

@@ -23,12 +23,15 @@ public class Poll implements Serializable {
     private Boolean is_anonymous;
     private Type type;
     private Boolean allows_multiple_answers;
-    private Integer correct_option_id;
+    private Boolean allows_revoting;
+    private Integer[] correct_option_ids;
     private String explanation;
     private MessageEntity[] explanation_entities;
     private PollMedia explanation_media;
     private Integer open_period;
     private Integer close_date;
+    private String description;
+    private MessageEntity[] description_entities;
     private PollMedia media;
     private Boolean members_only;
     private String[] country_codes;
@@ -40,7 +43,7 @@ public class Poll implements Serializable {
     public String question() {
         return question;
     }
-    
+
     public MessageEntity[] questionEntities() {
         return question_entities;
     }
@@ -69,8 +72,12 @@ public class Poll implements Serializable {
         return allows_multiple_answers;
     }
 
-    public Integer correctOptionId() {
-        return correct_option_id;
+    public Boolean allowsRevoting() {
+        return allows_revoting;
+    }
+
+    public Integer[] correctOptionIds() {
+        return correct_option_ids;
     }
 
     public String explanation() {
@@ -87,6 +94,14 @@ public class Poll implements Serializable {
 
     public Integer closeDate() {
         return close_date;
+    }
+
+    public String description() {
+        return description;
+    }
+
+    public MessageEntity[] descriptionEntities() {
+        return description_entities;
     }
 
     public PollMedia media() {
@@ -123,12 +138,15 @@ public class Poll implements Serializable {
         if (type != poll.type) return false;
         if (allows_multiple_answers != null ? !allows_multiple_answers.equals(poll.allows_multiple_answers) : poll.allows_multiple_answers != null)
             return false;
-        if (correct_option_id != null ? !correct_option_id.equals(poll.correct_option_id) : poll.correct_option_id != null)
+        if (allows_revoting != null ? !allows_revoting.equals(poll.allows_revoting) : poll.allows_revoting != null)
             return false;
+        if (!Arrays.equals(correct_option_ids, poll.correct_option_ids)) return false;
         if (explanation != null ? !explanation.equals(poll.explanation) : poll.explanation != null) return false;
         if (!Arrays.equals(explanation_entities, poll.explanation_entities)) return false;
         if (open_period != null ? !open_period.equals(poll.open_period) : poll.open_period != null) return false;
         if (close_date != null ? !close_date.equals(poll.close_date) : poll.close_date != null) return false;
+        if (description != null ? !description.equals(poll.description) : poll.description != null) return false;
+        if (!Arrays.equals(description_entities, poll.description_entities)) return false;
         if (media != null ? !media.equals(poll.media) : poll.media != null) return false;
         if (explanation_media != null ? !explanation_media.equals(poll.explanation_media) : poll.explanation_media != null) return false;
         if (members_only != null ? !members_only.equals(poll.members_only) : poll.members_only != null) return false;
@@ -152,12 +170,15 @@ public class Poll implements Serializable {
                 ", is_anonymous=" + is_anonymous +
                 ", type=" + type +
                 ", allows_multiple_answers=" + allows_multiple_answers +
-                ", correct_option_id=" + correct_option_id +
+                ", allows_revoting=" + allows_revoting +
+                ", correct_option_ids=" + Arrays.toString(correct_option_ids) +
                 ", explanation='" + explanation + '\'' +
                 ", explanation_entities=" + Arrays.toString(explanation_entities) +
                 ", explanation_media=" + explanation_media +
                 ", open_period=" + open_period +
                 ", close_date=" + close_date +
+                ", description='" + description + '\'' +
+                ", description_entities=" + Arrays.toString(description_entities) +
                 ", media=" + media +
                 ", members_only=" + members_only +
                 ", country_codes=" + Arrays.toString(country_codes) +

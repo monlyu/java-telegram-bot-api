@@ -17,7 +17,9 @@ data class Video(
 
     @get:JvmName("fileName") val fileName: String? = null,
     @get:JvmName("mimeType") val mimeType: String? = null,
-    @get:JvmName("fileSize") val fileSize: Long? = null
+    @get:JvmName("fileSize") val fileSize: Long? = null,
+
+    @get:JvmName("qualities") val qualities: List<VideoQuality>? = null
 ) {
 
     /**

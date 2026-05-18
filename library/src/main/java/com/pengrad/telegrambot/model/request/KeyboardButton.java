@@ -12,15 +12,28 @@ public class KeyboardButton implements Serializable {
     private final static long serialVersionUID = 0L;
 
     private String text;
+    private String icon_custom_emoji_id;
+    private String style;
     private boolean request_contact;
     private boolean request_location;
     private KeyboardButtonPollType request_poll;
     private KeyboardButtonRequestUsers request_users;
     private KeyboardButtonRequestChat request_chat;
+    private KeyboardButtonRequestManagedBot request_managed_bot;
     private WebAppInfo web_app;
 
     public KeyboardButton(String text) {
         this.text = text;
+    }
+
+    public KeyboardButton iconCustomEmojiId(String iconCustomEmojiId) {
+        this.icon_custom_emoji_id = iconCustomEmojiId;
+        return this;
+    }
+
+    public KeyboardButton style(String style) {
+        this.style = style;
+        return this;
     }
 
     public KeyboardButton requestLocation(boolean requestLocation) {
@@ -45,6 +58,11 @@ public class KeyboardButton implements Serializable {
 
     public KeyboardButton requestChat(KeyboardButtonRequestChat chat) {
         this.request_chat = chat;
+        return this;
+    }
+
+    public KeyboardButton requestManagedBot(KeyboardButtonRequestManagedBot managedBot) {
+        this.request_managed_bot = managedBot;
         return this;
     }
 

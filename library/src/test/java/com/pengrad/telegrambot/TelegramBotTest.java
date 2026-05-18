@@ -1875,7 +1875,7 @@ public class TelegramBotTest {
                         .isAnonymous(false)
                         .type(Poll.Type.quiz)
                         .allowsMultipleAnswers(false)
-                        .correctOptionId(1)
+                        .correctOptionIds(1)
                         .isClosed(false)
                         .explanation("Some __explanation__ of poll")
                         .explanationParseMode(ParseMode.MarkdownV2)
@@ -1898,7 +1898,7 @@ public class TelegramBotTest {
         assertEquals(poll.type(), Poll.Type.quiz);
         assertFalse(poll.allowsMultipleAnswers());
         assertEquals(poll.totalVoterCount(), Integer.valueOf(0));
-        assertEquals(poll.correctOptionId(), Integer.valueOf(1));
+        assertArrayEquals(poll.correctOptionIds(), new Integer[]{1});
         assertFalse(poll.isClosed());
         assertEquals("Some explanation of poll", poll.explanation());
         assertEquals(1, poll.explanationEntities().length);
