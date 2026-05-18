@@ -1,13 +1,22 @@
 package com.pengrad.telegrambot;
 
-import com.pengrad.telegrambot.checks.*;
+import com.pengrad.telegrambot.checks.ChatTest;
+import com.pengrad.telegrambot.checks.InvoiceCheck;
+import com.pengrad.telegrambot.checks.UserTest;
 import com.pengrad.telegrambot.model.*;
-import com.pengrad.telegrambot.model.request.*;
-import com.pengrad.telegrambot.request.*;
-import com.pengrad.telegrambot.response.*;
-
+import com.pengrad.telegrambot.model.request.InlineKeyboardButton;
+import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
+import com.pengrad.telegrambot.model.request.LabeledPrice;
+import com.pengrad.telegrambot.model.request.ShippingOption;
+import com.pengrad.telegrambot.request.AnswerPreCheckoutQuery;
+import com.pengrad.telegrambot.request.AnswerShippingQuery;
+import com.pengrad.telegrambot.request.CreateInvoiceLink;
+import com.pengrad.telegrambot.request.SendInvoice;
+import com.pengrad.telegrambot.response.BaseResponse;
+import com.pengrad.telegrambot.response.SendResponse;
+import com.pengrad.telegrambot.response.StringResponse;
 import com.pengrad.telegrambot.utility.BotUtils;
-import org.junit.*;
+import org.junit.Test;
 
 import java.util.Objects;
 
