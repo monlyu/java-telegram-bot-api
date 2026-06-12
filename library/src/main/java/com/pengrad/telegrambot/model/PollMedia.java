@@ -16,6 +16,7 @@ public class PollMedia implements Serializable {
     private Sticker sticker;
     private Venue venue;
     private Video video;
+    private Link link;
 
     public Animation animation() {
         return animation;
@@ -53,6 +54,10 @@ public class PollMedia implements Serializable {
         return video;
     }
 
+    public Link link() {
+        return link;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -66,12 +71,13 @@ public class PollMedia implements Serializable {
                 Arrays.equals(photo, that.photo) &&
                 Objects.equals(sticker, that.sticker) &&
                 Objects.equals(venue, that.venue) &&
-                Objects.equals(video, that.video);
+                Objects.equals(video, that.video) &&
+                Objects.equals(link, that.link);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(animation, audio, document, live_photo, location, sticker, venue, video);
+        int result = Objects.hash(animation, audio, document, live_photo, location, sticker, venue, video, link);
         result = 31 * result + Arrays.hashCode(photo);
         return result;
     }
@@ -88,6 +94,7 @@ public class PollMedia implements Serializable {
                 ", sticker=" + sticker +
                 ", venue=" + venue +
                 ", video=" + video +
+                ", link=" + link +
                 '}';
     }
 }

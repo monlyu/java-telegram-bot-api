@@ -22,6 +22,9 @@ public class Updates {
         if (update.messageReactionCount() != null) return update.messageReactionCount().chat();
         if (update.chatBoost() != null) return update.chatBoost().chat();
         if (update.removedChatBoost() != null) return update.removedChatBoost().chat();
+        if (update.guestMessage() != null) {
+            return update.guestMessage().guestBotCallerChat() == null ? update.guestMessage().chat() : update.guestMessage().guestBotCallerChat();
+        }
         if (update.callbackQuery() != null && update.callbackQuery().message() != null)
             return update.callbackQuery().message().chat();
         return null;
@@ -36,6 +39,9 @@ public class Updates {
         if (update.businessMessage() != null) return update.businessMessage().from();
         if (update.editedBusinessMessage() != null) return update.editedBusinessMessage().from();
         if (update.inlineQuery() != null) return update.inlineQuery().from();
+        if (update.guestMessage() != null) {
+            return update.guestMessage().guestBotCallerUser() == null ? update.guestMessage().from() : update.guestMessage().guestBotCallerUser();
+        }
         if (update.chosenInlineResult() != null) return update.chosenInlineResult().from();
         if (update.callbackQuery() != null) return update.callbackQuery().from();
         if (update.shippingQuery() != null) return update.shippingQuery().from();
@@ -54,6 +60,7 @@ public class Updates {
         if (update.channelPost() != null) return update.channelPost();
         if (update.editedChannelPost() != null) return update.editedChannelPost();
         if (update.businessMessage() != null) return update.businessMessage();
+        if (update.guestMessage() != null) return update.guestMessage();
         if (update.editedBusinessMessage() != null) return update.editedBusinessMessage();
         if (update.callbackQuery() != null) {
             return update.callbackQuery().message();

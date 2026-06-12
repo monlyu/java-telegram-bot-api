@@ -45,6 +45,11 @@ public class InputPollOption implements Serializable {
         return this;
     }
 
+    public InputPollOption media(InputMediaLink media) {
+        this.media = media;
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

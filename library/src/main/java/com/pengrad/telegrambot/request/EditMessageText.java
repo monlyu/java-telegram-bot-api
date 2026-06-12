@@ -4,6 +4,7 @@ import com.pengrad.telegrambot.model.LinkPreviewOptions;
 import com.pengrad.telegrambot.model.MessageEntity;
 import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.model.request.ParseMode;
+import com.pengrad.telegrambot.model.rich.InputRichMessage;
 import com.pengrad.telegrambot.response.BaseResponse;
 import com.pengrad.telegrambot.response.SendResponse;
 
@@ -41,6 +42,10 @@ public class EditMessageText extends BaseRequest<EditMessageText, BaseResponse> 
 
     public EditMessageText businessConnectionId(String businessConnectionId) {
         return add("business_connection_id", businessConnectionId);
+    }
+
+    public EditMessageText richMessage(InputRichMessage richMessage) {
+        return add("rich_message", richMessage);
     }
 
 }

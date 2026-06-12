@@ -79,6 +79,7 @@ public class ChatFullInfo implements Serializable {
     private Integer paid_message_star_count;
     private UniqueGiftColors unique_gift_colors;
     private Audio first_profile_audio;
+    private User guard_bot;
 
     public Long id() {
         return id;
@@ -281,6 +282,10 @@ public class ChatFullInfo implements Serializable {
 
     public Audio firstProfileAudio() {
         return first_profile_audio;
+    }
+
+    public User guardBot() {
+        return guard_bot;
     }
 
     @Override

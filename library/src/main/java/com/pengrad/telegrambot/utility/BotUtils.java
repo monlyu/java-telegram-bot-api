@@ -13,6 +13,8 @@ import com.pengrad.telegrambot.model.message.origin.MessageOrigin;
 import com.pengrad.telegrambot.model.paidmedia.PaidMedia;
 import com.pengrad.telegrambot.model.reaction.ReactionType;
 import com.pengrad.telegrambot.model.request.InputFile;
+import com.pengrad.telegrambot.model.rich.RichBlock;
+import com.pengrad.telegrambot.model.rich.RichText;
 import com.pengrad.telegrambot.model.stars.partner.TransactionPartner;
 import com.pengrad.telegrambot.model.stars.withdrawal.RevenueWithdrawalState;
 import com.pengrad.telegrambot.utility.extend.Byte2B64Adapter;
@@ -44,6 +46,8 @@ public class BotUtils {
             .registerTypeAdapter(TransactionPartner.class, TransactionPartnerTypeAdapter.INSTANCE)
             .registerTypeAdapter(PaidMedia.class, new PaidMediaTypeAdapter())
             .registerTypeAdapter(OwnedGift.class, new OwnedGiftTypeAdapter())
+            .registerTypeAdapter(RichText.class, new RichTextTypeAdapter())
+            .registerTypeAdapter(RichBlock.class, new RichBlockTypeAdapter())
             .registerTypeAdapter(InputFile.class, new InputFileAdapter())
             .registerTypeAdapter(byte[].class, new Byte2B64Adapter())
             .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
@@ -68,6 +72,25 @@ public class BotUtils {
 
     public static <R> R fromJson(String jsonString, Class<R> resClass) {
         return GSON.fromJson(jsonString, resClass);
+    }
+
+    public static <R> R fromJsonTry(String jsonString, Class<R> resClass) {
+        try {
+            return GSON.fromJson(jsonString, resClass);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static <R> R fromObjTry(Object input, Class<R> revertClass) {
+        try {
+            if (revertClass.isAssignableFrom(input.getClass())) {
+                return (R) input;
+            }
+            return GSON.fromJson(toJson(input), revertClass);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public static String toJson(Object obj) {

@@ -17,6 +17,7 @@ import com.pengrad.telegrambot.model.paidmedia.PaidMediaInfo;
 import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.model.stars.DirectMessagePriceChanged;
 import com.pengrad.telegrambot.model.stars.PaidMessagePriceChanged;
+import com.pengrad.telegrambot.model.rich.RichMessage;
 import com.pengrad.telegrambot.model.suggestedposts.*;
 import com.pengrad.telegrambot.passport.PassportData;
 
@@ -142,6 +143,7 @@ public class Message extends MaybeInaccessibleMessage implements Serializable {
     private PollOptionAdded poll_option_added;
     private PollOptionDeleted poll_option_deleted;
     private String reply_to_poll_option_id;
+    private RichMessage rich_message;
 
     public Long messageThreadId() {
         return message_thread_id;
@@ -586,6 +588,10 @@ public class Message extends MaybeInaccessibleMessage implements Serializable {
 
     public String replyToPollOptionId() {
         return reply_to_poll_option_id;
+    }
+
+    public RichMessage richMessage() {
+        return rich_message;
     }
 
     /**

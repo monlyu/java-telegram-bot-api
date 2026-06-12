@@ -16,6 +16,7 @@ public class ChatJoinRequest implements Serializable {
     private Integer date;
     private String bio;
     private ChatInviteLink invite_link;
+    private String query_id;
 
     public Chat chat() {
         return chat;
@@ -41,6 +42,9 @@ public class ChatJoinRequest implements Serializable {
         return invite_link;
     }
 
+    public String queryId() {
+        return query_id;
+    }
 
     @Override
     public boolean equals(Object o) {

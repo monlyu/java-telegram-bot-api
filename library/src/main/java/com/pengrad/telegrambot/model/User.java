@@ -27,6 +27,7 @@ public class User implements Serializable {
     private Boolean allows_users_to_create_topics;
     private Boolean supports_guest_queries;
     private Boolean can_manage_bots;
+    private Boolean supports_join_request_queries;
 
     private User() {
     }
@@ -101,6 +102,10 @@ public class User implements Serializable {
 
     public Boolean canManageBots() {
         return can_manage_bots != null && can_manage_bots;
+    }
+
+    public Boolean supportsJoinRequestQueries() {
+        return supports_join_request_queries != null && supports_join_request_queries;
     }
 
     @Override
